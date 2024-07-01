@@ -1,27 +1,20 @@
 import Image from "next/image";
+import kryptousers from '@/lib/testimonialsData';
+import { useEffect, useState } from "react";
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Olivia Cole",
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ullamcorper scelerisque mi, in malesuada felis malesuada vel.",
-      image: "/path/to/olivia-cole-image.png", // Replace with actual path to the image
-    },
-    {
-      name: "Olivia Cole",
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ullamcorper scelerisque mi, in malesuada felis malesuada vel.",
-      image: "/path/to/olivia-cole-image.png", // Replace with actual path to the image
-    },
-    {
-      name: "Olivia Cole",
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ullamcorper scelerisque mi, in malesuada felis malesuada vel.",
-      image: "/path/to/olivia-cole-image.png", // Replace with actual path to the image
-    },
-  ];
+  const [testimonialData, setTestimonialData] = useState([]);
 
+  useEffect(() => {
+    getKryptousers();
+  }, []);
+
+  const getKryptousers = async () => {    
+    const res = await kryptousers(); 
+    console.log(res);  
+    setTestimonialData(res.kryptousers);
+  };
+  
   return (
     <div className="bg-dark-blue text-white py-16">
       <div className="container mx-auto text-center">
@@ -32,11 +25,11 @@ const Testimonials = () => {
         </p>
 
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start space-y-8 md:space-y-0 md:space-x-8 pt-12 md:pt-20">
-          {testimonials.map((testimonial, index) => (
+          {testimonialData.map((testimonial, index) => (
             <div key={index} className="max-w-xs text-center md:text-left">
               <div className="mb-4">
                 <Image
-                  src={testimonial.image}
+                  src={testimonial.image.id}
                   alt={testimonial.name}
                   className="rounded-full mx-auto"
                   width={100}
