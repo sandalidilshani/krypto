@@ -29,7 +29,6 @@ const Testimonials = () => {
             <div key={index} className="max-w-xs text-center md:text-left">
               <div className="mb-4">
                 <Image
-                  src={testimonial.image.id}
                   alt={testimonial.name}
                   className="rounded-full mx-auto"
                   width={100}
